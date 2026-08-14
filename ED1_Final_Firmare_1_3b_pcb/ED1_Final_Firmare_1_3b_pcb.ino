@@ -23,7 +23,7 @@ const float BATTERY_FULL_VOLTAGE  = 4.25f;  // Battery full charge = 100%
 
 esp_adc_cal_characteristics_t adc_chars;
 
-const unsigned TX_INTERVAL_SECONDS = 500; // Profile will last ~10.8, so the tx will comence in >510s.
+const unsigned TX_INTERVAL_SECONDS = 500; // Profile will last ~10.8s, so the tx will comence in >510s.
 const int PAYLOAD_SIZE = 33;
 
 #define uS_TO_S_FACTOR 1000000ULL
