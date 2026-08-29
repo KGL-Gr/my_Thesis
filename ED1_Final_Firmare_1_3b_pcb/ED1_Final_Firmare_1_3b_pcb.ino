@@ -364,7 +364,7 @@ void configureLmicCommon() {
   LMIC_setClockError(MAX_CLOCK_ERROR * 5 / 100);
   LMIC_setLinkCheckMode(0);
   LMIC_setAdrMode(0);
-  LMIC_setDrTxpow(DR_SF8, 14);
+  LMIC_setDrTxpow(DR_SF8, 12);
 }
 
 void saveJoinedSessionFromLmic() {
