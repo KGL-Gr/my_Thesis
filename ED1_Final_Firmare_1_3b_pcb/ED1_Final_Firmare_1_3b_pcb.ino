@@ -459,7 +459,7 @@ void goToDeepSleep() {
   Serial.println(F(" seconds."));
 
   bme.setOpMode(BME68X_SLEEP_MODE);
-
+  os_radio(RADIO_RST);
   WiFi.mode(WIFI_OFF);
   esp_wifi_stop();
   esp_bt_controller_disable();
