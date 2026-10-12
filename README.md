@@ -14,7 +14,7 @@ The system architecture is structured across three interconnected layers:
 * **Network Layer:** Long-range, low-power wireless transmission using the **LoRaWAN** protocol (EU868 band) to an outdoor gateway, managed by **The Things Stack (TTS)**.
 * **Application Layer:** Asynchronous ingestion via **MQTT** in Python, fire probability classification via trained ML models, time-series storage in **InfluxDB**, and real-time visualization and alerting via **Grafana**.
 
-### 🎨 A "Highly Rigorous" (and Hand-Drawn) Conceptual Diagram 
+### 🎨 A "Highly Rigorous" (and Hand-Drawn) conceptual depiction of the phenomenon.
 
 ![System Overview Sketch](assets/IMG_20260905_001206.png)
 
