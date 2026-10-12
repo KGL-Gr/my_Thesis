@@ -30,3 +30,22 @@ The sensor node was engineered from the ground up for minimal quiescent current 
 * **Backend Bridge (`python_bridge`):** Python daemon subscribing to The Things Stack broker via **Paho MQTT** (`v3/+/devices/+/up`). It decodes the JSON payload, retrieves geographical coordinates from the TTS Device Registry (cached for **900 s** to avoid unnecessary API requests), and invokes the classification pipeline.
 * **Machine Learning Pipeline:** The 13-dimensional feature vector `[T, RH, P, Gas_0, Gas_1, ..., Gas_9]` is scaled using `StandardScaler` (z-score) and fed into binary classifiers (`0: FIRE`, `1: NO FIRE`). Evaluated models include **Support Vector Machines (SVM with RBF kernel)**, **AdaBoost**, and **XGBoost**. The probability of fire is retrieved via `predict_proba()`.
 * **Storage & Visualization:** Formatted data records (environmental telemetry, fire probability, battery percentage, RSSI, SNR, and node coordinates) are stored in **InfluxDB**. The **Grafana** dashboard displays node status on an interactive map, tracks metrics over time, and triggers automated alerts (**Probable Wildfire** at **>67%** threshold, and **Low Battery** at **<20%**) via Email.
+
+## Experimental Evaluation & Results
+
+### 1. Classifier Performance & Feature Analysis
+The dataset (445 total observations: 145 combustion samples and 300 non-fire baseline samples) was collected across multiple controlled burn experiments involving typical Mediterranean biomass (Aleppo pine, olive tree, oriental plane, Cotinus coggygria, acacia, almond, and dry wheat straw). The node's horizontal distance from the fire ranges from 3-6m, vertical distance ranges from 1-2.5m, in some experiments NLOS conditions were present. The dataset was evaluated using an 80/20 stratified train/test split (`random_state=42`). 
+
+Principal Component Analysis (**PCA**) demonstrated that the first two components explain **78.45%** of the total variance (`PC1 = 68.57%`, `PC2 = 9.87%`), with gas resistance channels driving PC1. Non-linear **t-SNE** projection verified clear spatial separation between FIRE and NO FIRE clusters.
+
+| Model | Accuracy | Precision (FIRE) | Recall (FIRE) | F1-score (FIRE) |
+| :--- | :--- | :--- | :--- | :--- |
+| **AdaBoost** | 100% | 100% | 100% | 100% |
+| **SVM (RBF)** | 98.88% | 100% | 96.55% | 98.25% |
+| **XGBoost** | 100% | 100% | 100% | 100% |
+
+### 2. Radio Propagation Field Tests
+Empirical LoRaWAN propagation trials (868 MHz, SF8, 12 dBm) were conducted in dense Mediterranean forest conditions near Alonia, Pieria. Fitting the **Log-Distance Path Loss Model** yielded a path loss exponent of **$n \approx 3.02$** in the forest (compared to **$n_{LOS} = 1.72$** under Line-of-Sight conditions). Theoretical excess foliage attenuation was modeled and compared using the **ITU-R P.833-10** recommendation and the **Weissberger Modified Exponential Decay** model.
+
+### 3. Power Consumption & Energy Autonomy
+For a total duty cycle of **520 s** (**20 s** active operation averaging **24.55 mA** and **500 s** deep sleep consuming **107 μA**), the average current draw of the node is **1.048 mA**. Powered by a single 18650 cell (**3350 mAh**, accounting for 90% usable capacity), the theoretical operating autonomy reaches **2,877 hours** (**~120 days / 4 months**) without energy harvesting.
