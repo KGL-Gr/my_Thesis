@@ -2,7 +2,7 @@
 
 This repository contains the firmware, backend services, and experimental evaluation scripts for the diploma thesis titled **"Early detection of wildfires in remote forest areas using Multidimensional gas signatures and low-power communication"**. 
 
-The project was conducted at the **Department of Information and Electronic Systems Engineering**, School of Engineering, **International Hellenic University (IHU)**, by **George Kounatidis**, under the supervision of Professor **Dr. Periklis Chatzimisios**
+The project (v1.x.y) was conducted at the **Department of Information and Electronic Systems Engineering**, School of Engineering, **International Hellenic University (IHU)**, by **George Kounatidis**, under the supervision of Professor **Dr. Periklis Chatzimisios**
 
 ## System Overview
 
@@ -27,6 +27,8 @@ The sensor node was engineered from the ground up for minimal quiescent current 
 * **Power Supply & Energy Management:** Single 18650 Li-ion cell (**Samsung SDI INR18650-35E**, 3.6V nominal, 3350 mAh capacity) regulated down to 3.3V by a low-dropout (LDO) linear regulator (**Microchip MCP1700**). The onboard LDO was bypassed to achieve an ultra-low quiescent current. Battery voltage is monitored via a high-impedance voltage divider (**1 MΩ** / **330 kΩ**) and an RC filter (**100 nF**, cut-off frequency **6.4 Hz**) connected to ADC1_CH1 (`GPIO1`).
 * **Enclosure & Shielding:** Custom 2-layer PCB (**36.1 mm × 52.7 mm**, panelized layout) designed in **Altium Designer**. The BME688 is housed inside a custom ABS **Stevenson screen** to protect it from direct solar radiation and rain while maintaining natural ventilation.
 * **LoRaWAN Gateway:** **RAK5146 PiHAT** (Semtech SX1303 baseband processor, 8 multi-SF LoRa channels, SMA 3 dBi antenna) coupled with a **Raspberry Pi 4 Model B** running RAKPiOS and UDP Packet Forwarder.
+
+![Hardware Sketch](assets/pcb_comp_front_oldreg.jpg)
 
 ## Software, Network & Machine Learning
 
