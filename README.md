@@ -28,6 +28,8 @@ The sensor node was engineered from the ground up for minimal quiescent current 
 * **Enclosure & Shielding:** Custom 2-layer PCB (**36.1 mm × 52.7 mm**, panelized layout) designed in **Altium Designer**. The BME688 is housed inside a custom ABS **Stevenson screen** to protect it from direct solar radiation and rain while maintaining natural ventilation.
 * **LoRaWAN Gateway:** **RAK5146 PiHAT** (Semtech SX1303 baseband processor, 8 multi-SF LoRa channels, SMA 3 dBi antenna) coupled with a **Raspberry Pi 4 Model B** running RAKPiOS and UDP Packet Forwarder.
 
+### 🏾 The proposed end device that will solve all your problems "100% Guaranteed". In this photo it does have the old regulator though.
+
 ![Hardware Sketch](assets/pcb_comp_front_oldreg.jpg)
 
 ## Software, Network & Machine Learning
